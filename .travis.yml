@@ -1,0 +1,35 @@
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build -t vundb/multi-docker-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true vundb/multi-docker-test npm test
+
+after_success:
+  # Build fresh iamges
+  - docker build -t vundb/multi-docker-client ./client
+  - docker build -t vundb/multi-docker-nginx ./nginx
+  - docker build -t vundb/multi-docker-server ./server
+  - docker build -t vundb/multi-docker-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push -t vundb/multi-docker-client
+  - docker push -t vundb/multi-docker-nginx
+  - docker push -t vundb/multi-docker-server
+  - docker push -t vundb/multi-docker-worker
+#
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "eu-central-1"
+#   app: "sandbox-docker-react"
+#   env: "development"
+#   bucket_name: "elasticbeanstalk-eu-central-1-598824494253"
+#   bucket_path: "sandbox-docker-react"
+#   on:
+#     branch: master
+#   access_key_id: "$AWS_ACCESS_KEY"
+#   secret_access_key: "$AWS_SECRET_KEY"
