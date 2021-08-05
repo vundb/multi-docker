@@ -17,10 +17,10 @@ after_success:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push -t vundb/multi-docker-client
-  - docker push -t vundb/multi-docker-nginx
-  - docker push -t vundb/multi-docker-server
-  - docker push -t vundb/multi-docker-worker
+  - docker push vundb/multi-docker-client
+  - docker push vundb/multi-docker-nginx
+  - docker push vundb/multi-docker-server
+  - docker push vundb/multi-docker-worker
 #
 # deploy:
 #   provider: elasticbeanstalk
