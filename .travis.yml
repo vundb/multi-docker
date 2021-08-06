@@ -21,15 +21,15 @@ after_success:
   - docker push vundb/multi-docker-nginx
   - docker push vundb/multi-docker-server
   - docker push vundb/multi-docker-worker
-#
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "eu-central-1"
-#   app: "sandbox-docker-react"
-#   env: "development"
-#   bucket_name: "elasticbeanstalk-eu-central-1-598824494253"
-#   bucket_path: "sandbox-docker-react"
-#   on:
-#     branch: master
-#   access_key_id: "$AWS_ACCESS_KEY"
-#   secret_access_key: "$AWS_SECRET_KEY"
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "multi-docker"
+  bucket_name: "elasticbeanstalk-eu-central-1-598824494253"
+  bucket_path: "multi-docker"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
