@@ -15,3 +15,4 @@ kubectl apply -f k8s
 kubectl set iamge deployments/client-deployment client=vundb/multi-docker-client:$SHA
 kubectl set image deployments/server-deployment server=vundb/multi-docker-server:$SHA
 kubectl set image deployments/worker-deployment worker=vundb/multi-docker-worker:$SHA
+
