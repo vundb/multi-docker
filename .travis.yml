@@ -12,7 +12,7 @@ before_install:
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project xanten-multi-k8s
-  - gcloud config set compute/zone europe-west3-b
+  - gcloud config set compute/zone us-west4-a
   - gcloud container clusters get-credentials multi-k8s
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker build -t vundb/react-test -f ./client/Dockerfile.dev ./client
